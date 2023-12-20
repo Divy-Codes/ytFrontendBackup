@@ -1,0 +1,122 @@
+@import "../../base.scss"; //To use global variables
+
+.header {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: $black-primary;
+
+  .hamburger {
+    display: none;
+  }
+
+  .youtubeLogo {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+    display: block;
+  }
+
+  form {
+    flex: 0.45; //Since parent is flex. This would make it's width as 45% of parent
+    display: flex;
+    margin: 0 1rem;
+    border-radius: 50px;
+    background-color: $black-secondary;
+
+    input {
+      width: 100%;
+      background-color: transparent;
+      border: none;
+      box-shadow: 0px 0px 0px 1.2px #333 inset; //For inset border
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+      font-weight: 500;
+      color: $text-color;
+      padding: 0.5rem 1rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      padding: 0 1.25rem;
+      color: $text-color;
+      background-color: #242424;
+      border: none;
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+      &:focus {
+        border: none;
+      }
+    }
+  }
+
+  .userFeatures {
+    background-color: transparent;
+    flex: 0.15;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+
+    .user {
+      border-radius: 50%;
+    }
+  }
+}
+
+// Media Queries
+@media (max-width: $breakpoint-tablets-landscape) {
+  .header {
+    form {
+      // flex: 1;
+      flex-basis: 50%;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablets-potrait) {
+  .header {
+    form {
+      // flex: 1;
+      flex-basis: 60%;
+
+      input {
+        padding: 0.25rem 1rem;
+        font-size: 0.875rem; //14px;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-small) {
+  .header {
+    padding: 1.5rem 1rem;
+
+    form {
+      flex-basis: 100%; //Take 100% length in samll screens
+
+      input {
+        padding: 0.25rem 1rem;
+      }
+    }
+
+    .hamburger {
+      display: block;
+    }
+
+    .youtubeLogo {
+      display: none;
+    }
+
+    //Select all userFeatures children except ".user"
+    .userFeatures > *:not(.user) {
+      display: none;
+    }
+  }
+}

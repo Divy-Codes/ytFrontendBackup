@@ -1,0 +1,74 @@
+// Base.scss will store all mixins and variables
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+//Variables
+$text-color: #b1bdb4;
+$black-primary: #16181b;
+$black-secondary: #121417;
+$border-color: #4c4c4c;
+
+//Mixins
+@mixin lineClamp($numberOfLines) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $numberOfLines;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+}
+
+//Breakpoints for responsive site
+$breakpoint-medium: 1224px;
+$breakpoint-small: 520px;
+$breakpoint-tablets-landscape: 1024px;
+$breakpoint-tablets-potrait: 784px;
+
+// Reset
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+//Styling
+
+body {
+  //For hidden sidebar
+  width: 100%;
+  // overflow-x: hidden;
+
+  background-color: $black-primary;
+  color: $text-color;
+  background-attachment: fixed;
+  font-family: "Roboto" sans-serif;
+  letter-spacing: 0.1px;
+}
+
+body::-webkit-scrollbar {
+  background-color: #111;
+  visibility: hidden;
+  width: 0.6em;
+  &-track {
+    background-color: #444;
+    border-radius: 10px;
+  }
+  &-thumb {
+    border-radius: 10px;
+    background-color: #333;
+  }
+}
+
+body:hover::-webkit-scrollbar-track,
+body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
