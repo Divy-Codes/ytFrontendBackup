@@ -8,8 +8,19 @@ import {
   MdSentimentDissatisfied,
 } from "react-icons/md";
 import { IoMdThumbsUp } from "react-icons/io";
+import auth from "../../utils/firebase";
+import { signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/slices/authSlice";
 
 export default function Sidebar({ sidebar, toggleSidebar }) {
+  const dispatch = useDispatch();
+  const logOut = async () => {
+    await signOut(auth);
+    dispatch(logout());
+    sessionStorage.removeItem("access-token");
+    sessionStorage.removeItem("user-profile");
+  };
   return (
     <nav
       className={sidebar ? "sidebar open" : "sidebar"}
@@ -40,7 +51,7 @@ export default function Sidebar({ sidebar, toggleSidebar }) {
         <span>Lorem Ipsum</span>
       </li>
       <hr />
-      <li>
+      <li onClick={logOut}>
         <MdExitToApp size={23} />
         <span>Log Out</span>
       </li>

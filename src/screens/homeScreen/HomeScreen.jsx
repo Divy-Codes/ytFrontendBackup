@@ -10,8 +10,8 @@ export default function HomeScreen() {
       <CategoriesBar />
       {/* Row for video component */}
       <Row>
-        {[...new Array(20)].map(() => (
-          <Col md={4}>
+        {[...new Array(20)].map((item, i) => (
+          <Col md={4} key={i}>
             <Video />
           </Col>
         ))}

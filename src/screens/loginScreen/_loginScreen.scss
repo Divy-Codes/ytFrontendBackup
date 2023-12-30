@@ -23,6 +23,12 @@
       }
     }
 
+    .heart {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: inherit;
+    }
+
     button {
       background-color: #242424;
       border: none;

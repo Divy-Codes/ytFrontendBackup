@@ -3,13 +3,13 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import HomeScreen from "./screens/homeScreen/HomeScreen";
 import "./_app.scss";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Layout = ({ children }) => {
+const HomeLayout = ({ children }) => {
   const [sidebar, toggleSidebar] = useReducer((value) => !value, false);
-
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
@@ -26,29 +26,36 @@ const Layout = ({ children }) => {
 };
 
 export default function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <HomeScreen />
-            </Layout>
-          }
-        />
+  const { accessToken, loading } = useSelector((state) => state.authObject);
 
-        <Route path="/auth" element={<LoginScreen />} />
-        <Route
-          path="/search"
-          element={
-            <Layout>
-              <h1>Search Component</h1>
-            </Layout>
-          }
-        />
-        <Route path="*" element={<h3>Error 404: Not Found. Invalid URL </h3>} />
-      </Routes>
-    </Router>
+  //Re-direct to "/auth" if accessToken is null. Protects other components when not logged in
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!loading && !accessToken) {
+      navigate("/auth");
+    }
+  }, [accessToken, loading, navigate]);
+
+  return (
+    <Routes>
+      <Route path="/auth" element={<LoginScreen />} />
+      <Route
+        path="/"
+        element={
+          <HomeLayout>
+            <HomeScreen />
+          </HomeLayout>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <HomeLayout>
+            <h1>Search Component</h1>
+          </HomeLayout>
+        }
+      />
+      <Route path="*" element={<h3>Error 404: Not Found. Invalid URL </h3>} />
+    </Routes>
   );
 }
