@@ -22,6 +22,7 @@ export default function LoginScreen() {
       dispatch(authPending());
 
       const provider = new GoogleAuthProvider();
+      provider.addScope("https://www.googleapis.com/auth/youtube.force-ssl");
       const response = await signInWithPopup(auth, provider);
 
       //REMOVE LATER
@@ -34,7 +35,7 @@ export default function LoginScreen() {
         photoURL: response.user.photoURL,
       };
 
-      //Loading set to false inside authSuccess.
+      //Loading set to false inside authSuccess reducer.
       dispatch(authSuccess(accessToken));
       dispatch(loadProfile(userProfile));
 

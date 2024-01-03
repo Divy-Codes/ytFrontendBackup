@@ -26,13 +26,12 @@
   }
 
   .detailsContainer {
-    display: flex;
+    display: grid;
+    grid-template-columns: 3rem auto;
     gap: 0.5rem;
     padding: 0.5rem;
 
     .channelImage {
-      width: 4rem;
-
       img {
         object-fit: contain;
         border-radius: 50%;
