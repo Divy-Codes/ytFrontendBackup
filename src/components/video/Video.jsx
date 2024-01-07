@@ -10,11 +10,8 @@ import request from "../../utils/api";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
-
-// function convertViewCount(views) {
-//   if (views >= 1000000) return `${Math.floor(views / 1000000)}m`;
-//   else if (views >= 1000) return `${Math.floor(views / 1000)}k`;
-// }
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function Video({ video }) {
   const {
@@ -34,7 +31,7 @@ export default function Video({ video }) {
   const [duration, setDuration] = useState("");
   const [viewCount, setViewCount] = useState("");
 
-  //In "/video" API call, the id is simple string property. But in "/search" API call, the id is an object and the id is inside the "videoId" property of "id". To factor both in we need the following
+  //In "/video" API call, the id is simple string property. But in "/search" API call, the id is an object and the id is inside the "videoId" property of "id". To factor in both, we need the following
   const videoId = id?.videoId || id;
 
   useEffect(() => {
@@ -53,7 +50,7 @@ export default function Video({ video }) {
   const seconds = dayjs.duration(duration).asSeconds();
   const videoDuration = dayjs.utc(seconds * 1000).format("mm:ss");
 
-  // Need another API call to get channel thumbnail
+  // Need another API call to get channel thumbnails
   let [channelThumbnailURL, setChannelThumbnail] = useState();
   useEffect(() => {
     (async () => {
@@ -70,12 +67,23 @@ export default function Video({ video }) {
   return (
     <div className="videoContainer">
       <div className="video">
-        <img src={medium.url} alt="video Thumbnail" />
-        <span>{videoDuration}</span>
+        <LazyLoadImage
+          src={medium.url}
+          alt="Video Thumbnail"
+          effect="blur"
+          className="videoThumbnail"
+          width="100%"
+        />
+        <span className="duration">{videoDuration}</span>
       </div>
       <div className="detailsContainer">
         <div className="channelImage">
-          <img src={channelThumbnailURL} alt="Channel Image" />
+          <LazyLoadImage
+            src={channelThumbnailURL}
+            alt="Channel Image"
+            effect="blur"
+            className="channelThumbnail"
+          />
         </div>
         <div className="details">
           <div className="videoTitle">{title}</div>
@@ -93,7 +101,6 @@ export default function Video({ video }) {
     </div>
   );
 }
-
 // const thumbnailURL = video.snippet.thumbnails.medium.url;
 // const videoTitle = video.snippet.title;
 // const channelTitle = video.snippet.channelTitle;

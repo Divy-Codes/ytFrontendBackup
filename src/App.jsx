@@ -1,8 +1,8 @@
+import "./_app.scss";
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import HomeScreen from "./screens/homeScreen/HomeScreen";
-import "./_app.scss";
 import { useEffect, useReducer } from "react";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import { Routes, Route, useNavigate } from "react-router-dom";

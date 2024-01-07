@@ -8,6 +8,9 @@
   justify-content: space-between;
   padding: 1rem 2rem;
   background-color: $black-primary;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 
   .hamburger {
     display: none;

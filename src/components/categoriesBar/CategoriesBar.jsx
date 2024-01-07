@@ -1,18 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./_categoriesBar.scss";
-import { getVideosByCategory } from "../../redux/slices/homeVideosSlice";
+import {
+  getHomeVideos,
+  getVideosByCategory,
+} from "../../redux/slices/homeVideosSlice";
 import { useDispatch } from "react-redux";
 const str =
-  "ReduxToolkit React ArundhatiRoy PortfolioWebsite WordpressBlogHosting marxistProject marxismExplained YanisVaroufakis DavidGraeber";
+  "All ReduxToolkit ReactJS ArundhatiRoy PortfolioWebsite WordpressBlogHosting marxistProject marxismExplained YanisVaroufakis DavidGraeber";
 const arr = str.split(" ");
 
 export default function CategoriesBar() {
+  const [activeCategory, setActiveCategory] = useState("All");
   const dispatch = useDispatch();
-  const [activeCategory, setActiveCategory] = useState("Roy");
   const categoryClicked = (category) => {
     setActiveCategory(category);
-    dispatch(getVideosByCategory(category));
   };
+
+  useEffect(() => {
+    console.log(`active category inside useEffect:`, activeCategory);
+    if (activeCategory == "All") {
+      console.log(`all categ dispatched`);
+      dispatch(getHomeVideos());
+    } else {
+      console.log(`active categ dispatched`);
+      dispatch(getVideosByCategory(activeCategory));
+    }
+  }, [activeCategory, dispatch, setActiveCategory]);
+
   return (
     <div className="categoriesBar">
       {arr.map((category, index) => (

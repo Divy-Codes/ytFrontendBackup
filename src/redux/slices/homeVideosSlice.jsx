@@ -4,6 +4,7 @@ import request from "../../utils/api";
 export const getVideosByCategory = createAsyncThunk(
   "videosByCategory/getVideosByCategory",
   async (keyword, { getState }) => {
+    console.log(`prevToken:`, getState().homeVideos.nextPageToken);
     try {
       const { data } = await request.get("/search", {
         params: {
@@ -14,7 +15,8 @@ export const getVideosByCategory = createAsyncThunk(
           type: "video",
         },
       });
-      // console.log(`category response: `, response);
+
+      console.log(`nextToken:`, data.nextPageToken);
       return {
         items: data.items,
         nextPageToken: data.nextPageToken,
@@ -29,7 +31,7 @@ export const getVideosByCategory = createAsyncThunk(
 
 export const getHomeVideos = createAsyncThunk(
   "homeVideos/getHomeVideos",
-  async () => {
+  async (args, { getState }) => {
     try {
       const { data } = await request.get("/videos", {
         params: {
@@ -37,7 +39,7 @@ export const getHomeVideos = createAsyncThunk(
           chart: "mostPopular",
           regionCode: "IN",
           maxResults: 20,
-          pageToken: "",
+          pageToken: getState().homeVideos.nextPageToken,
         },
       });
       return {
@@ -51,6 +53,10 @@ export const getHomeVideos = createAsyncThunk(
     }
   }
 );
+
+// const concatVideos=(oldVids,newVids)=>{
+//   newVids.filter(newvid=>)
+// }
 
 const homeVideosSlice = createSlice({
   name: "homeVideos",
@@ -68,7 +74,12 @@ const homeVideosSlice = createSlice({
       .addCase(getHomeVideos.fulfilled, (state, action) => {
         return {
           ...state,
-          videos: action.payload.items,
+          //Concat videos if active category is same. Implies another call made by infinite-scroll
+          videos:
+            state.nextPageToken !== action.payload.nextPageToken &&
+            state.activeCategory === action.payload.category
+              ? [...state.videos, ...action.payload.items]
+              : action.payload.items,
           nextPageToken: action.payload.nextPageToken,
           activeCategory: action.payload.category,
           loading: false,
@@ -85,9 +96,14 @@ const homeVideosSlice = createSlice({
         return { ...state, loading: true };
       })
       .addCase(getVideosByCategory.fulfilled, (state, action) => {
+        console.log(`entered categ fulfilled loop`);
         return {
           ...state,
-          videos: action.payload.items,
+          videos:
+            state.nextPageToken !== action.payload.nextPageToken &&
+            state.activeCategory === action.payload.category
+              ? [...state.videos, ...action.payload.items]
+              : action.payload.items,
           loading: false,
           nextPageToken: action.payload.nextPageToken,
           activeCategory: action.payload.category,
@@ -100,3 +116,26 @@ const homeVideosSlice = createSlice({
 });
 
 export default homeVideosSlice.reducer;
+
+//Try this:-
+// const videosSlice = createSlice({
+//   name: 'videos',
+//   initialState: {
+//     videos: [],
+//     nextPageToken: null,
+//   },
+//   reducers: {
+//     setVideos(state, action) {
+//       state.videos = action.payload;
+//     },
+//     concatVideos(state, action) {
+//       const newVideos = action.payload.filter((newVideo) => {
+//         return !state.videos.some((existingVideo) => existingVideo.id === newVideo.id);
+//       });
+//       state.videos = state.videos.concat(newVideos);
+//     },
+//     setNextPageToken(state, action) {
+//       state.nextPageToken = action.payload;
+//     },
+//   },
+// });
