@@ -1,0 +1,109 @@
+@import "../../_base.scss";
+
+.sidePlaylistSection {
+  cursor: pointer;
+  margin: 1rem 0;
+  gap: 0.5rem;
+
+  .videoThumbnail {
+    padding: 0.1rem;
+    .sideVideoThumbnail {
+      position: relative;
+      .sideThumbnail {
+        border-radius: 8px;
+        width: 100%;
+      }
+      .sideVideoDuration {
+        font-size: 0.7rem;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 5px;
+        padding: 0.1rem 0.2rem;
+        position: absolute;
+        bottom: 0.2rem;
+        right: 0.2rem;
+        color: #fff;
+      }
+    }
+  }
+
+  .videoDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0.1rem;
+    color: #eee;
+    .sideVideoTitle {
+      //   padding: 0 0.5rem;
+      @include lineClamp(2);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .sideVideoDetails {
+      color: #aaa;
+      font-size: 0.75rem;
+      .sideChannelName {
+        @include lineClamp(1);
+        width: 65%;
+      }
+    }
+    .viewsRelativeTime {
+      color: #aaa;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+//Smaller Laptops/Landscape tablets
+@media (max-width: 1200px) {
+  .sidePlaylistSection {
+    // .sideVideoThumbnail {
+    // }
+
+    .videoDetails {
+      .sideVideoTitle {
+        font-size: 1.2rem;
+      }
+      .sideChannelName {
+        font-size: 1rem;
+      }
+      .viewsRelativeTime {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+//Tablets
+@media (max-width: $breakpoint-tablets-potrait) {
+  .sidePlaylistSection {
+    .videoDetails {
+      .sideVideoTitle {
+        font-size: 1rem;
+      }
+      .sideChannelName {
+        font-size: 0.8rem;
+      }
+      .viewsRelativeTime {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+//Mobile Screens
+@media (max-width: $breakpoint-small) {
+  .sidePlaylistSection {
+    margin-bottom: 1.5rem;
+    .videoDetails {
+      .sideVideoTitle {
+        font-size: 1rem;
+      }
+      .sideChannelName {
+        font-size: 0.8rem;
+      }
+      .viewsRelativeTime {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

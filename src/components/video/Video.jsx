@@ -1,12 +1,12 @@
 import "./_video.scss";
 import { AiFillEye } from "react-icons/ai";
-import numeral from "numeral";
+import { useEffect, useState } from "react";
+import request from "../../utils/api";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
-import { useEffect, useState } from "react";
-import request from "../../utils/api";
+import numeral from "numeral";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.extend(utc);

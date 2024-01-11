@@ -7,6 +7,7 @@ import { useEffect, useReducer } from "react";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import VideoPlayerScreen from "./screens/VideoPlayer/VideoPlayerScreen";
 
 const HomeLayout = ({ children }) => {
   const [sidebar, toggleSidebar] = useReducer((value) => !value, false);
@@ -52,6 +53,14 @@ export default function App() {
         element={
           <HomeLayout>
             <h1>Search Component</h1>
+          </HomeLayout>
+        }
+      />
+      <Route
+        path="video/:videoId"
+        element={
+          <HomeLayout>
+            <VideoPlayerScreen />
           </HomeLayout>
         }
       />

@@ -1,0 +1,87 @@
+@import "../../_base.scss";
+
+.videoData {
+  .title {
+    color: #fff;
+  }
+  .channelDetailsContainer {
+    margin: 1rem 0;
+    .channelDetails {
+      img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .channel {
+        .channelTitle {
+          font-weight: 500;
+          color: #fff;
+        }
+        .subscribers {
+          color: #bbb;
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .subscribeButton {
+      .subscribe {
+        cursor: pointer;
+        padding: 0.4rem 0.7rem;
+        background-color: #eee;
+        border: none;
+        color: #000;
+        border-radius: 50px;
+
+        &:hover,
+        &:focus {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+
+    .likeUnlike {
+      background-color: rgba(68, 68, 68, 0.5);
+      border-radius: 20px;
+      padding: 0.4rem 0;
+      cursor: pointer;
+      border: none;
+
+      .likeButton {
+        padding: 0.7rem;
+        // background-color: red;
+      }
+
+      .dislikeButton {
+        padding: 0.7rem;
+      }
+
+      &:focus,
+      &:hover {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+  .description {
+    background-color: rgba(68, 68, 68, 0.5);
+    color: #ddd;
+    padding: 0.8rem;
+    border-radius: 10px;
+
+    .descriptionText {
+      white-space: pre-wrap;
+      font-size: 0.9rem;
+    }
+
+    //Wrap the text in 4 lines only if this class added
+    .showLess {
+      @include lineClamp(4);
+    }
+
+    .showMore {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

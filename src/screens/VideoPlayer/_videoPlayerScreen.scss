@@ -1,0 +1,9 @@
+@import "../../_base.scss";
+.videoPlayerContainer {
+  height: 60vh;
+  width: 100%;
+  margin-bottom: 1rem;
+  iframe {
+    border-radius: 10px;
+  }
+}
