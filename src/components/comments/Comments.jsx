@@ -1,7 +1,7 @@
 import "./_comments.scss";
 import Comment from "../comment/Comment";
 import { useState, useEffect } from "react";
-import SlidingPanel, { PanelType } from "react-sliding-side-panel";
+import SlidingPanel from "react-sliding-side-panel";
 import "react-sliding-side-panel/lib/index.css";
 export default function Comments() {
   //Collapse the comments if windowWidth<1200px

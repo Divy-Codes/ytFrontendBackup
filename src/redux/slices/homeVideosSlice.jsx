@@ -54,10 +54,6 @@ export const getHomeVideos = createAsyncThunk(
   }
 );
 
-// const concatVideos=(oldVids,newVids)=>{
-//   newVids.filter(newvid=>)
-// }
-
 const homeVideosSlice = createSlice({
   name: "homeVideos",
   initialState: {
@@ -96,7 +92,6 @@ const homeVideosSlice = createSlice({
         return { ...state, loading: true };
       })
       .addCase(getVideosByCategory.fulfilled, (state, action) => {
-        console.log(`entered categ fulfilled loop`);
         return {
           ...state,
           videos:
@@ -116,26 +111,3 @@ const homeVideosSlice = createSlice({
 });
 
 export default homeVideosSlice.reducer;
-
-//Try this:-
-// const videosSlice = createSlice({
-//   name: 'videos',
-//   initialState: {
-//     videos: [],
-//     nextPageToken: null,
-//   },
-//   reducers: {
-//     setVideos(state, action) {
-//       state.videos = action.payload;
-//     },
-//     concatVideos(state, action) {
-//       const newVideos = action.payload.filter((newVideo) => {
-//         return !state.videos.some((existingVideo) => existingVideo.id === newVideo.id);
-//       });
-//       state.videos = state.videos.concat(newVideos);
-//     },
-//     setNextPageToken(state, action) {
-//       state.nextPageToken = action.payload;
-//     },
-//   },
-// });

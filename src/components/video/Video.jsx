@@ -12,6 +12,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(utc);
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Video({ video }) {
   const {
@@ -64,8 +65,13 @@ export default function Video({ video }) {
     })();
   }, [channelId]);
 
+  const navigate = useNavigate();
+  const navigateToVideo = (id) => {
+    navigate(`/video/${id}`);
+  };
+
   return (
-    <div className="videoContainer">
+    <div className="videoContainer" onClick={() => navigateToVideo(videoId)}>
       <div className="video">
         <LazyLoadImage
           src={medium.url}

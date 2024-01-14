@@ -16,7 +16,7 @@ export default function Header({ toggleSidebar }) {
       />
 
       <form>
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search" name="searchForm" />
         <button onSubmit={() => {}}>
           <AiOutlineSearch size={22} />
         </button>

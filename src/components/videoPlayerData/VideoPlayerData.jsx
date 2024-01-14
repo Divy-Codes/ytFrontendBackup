@@ -9,16 +9,21 @@ import { VscThumbsdownFilled } from "react-icons/vsc";
 import { VscThumbsup } from "react-icons/vsc";
 import { VscThumbsupFilled } from "react-icons/vsc";
 
-export default function VideoPlayerData() {
+export default function VideoPlayerData({ video, videoId }) {
+  console.log(video);
+
+  // const { title, publishedAt, description, channelTitle, channelId } =
+  //   video.snippet;
+  // const { viewCount, likeCount, dislikeCount } = video.statistics;
+
   const [liked, toggleLiked] = useReducer((value) => !value, false);
   const [disliked, toggleDisliked] = useReducer((value) => !value, false);
   const [showMore, toggleShowMore] = useReducer((value) => !value, false);
   return (
     <div className="videoData">
       <div className="title">
-        <h4 className="videoTitle">
-          Part 8 : UI Design : Watch Screen - YouTube Clone using React & API
-        </h4>
+        {/* <h4 className="videoTitle">{title}</h4> */}
+        <h4 className="videoTitle">Vidoe title here</h4>
       </div>
       <div className="channelDetailsContainer d-flex justify-content-between align-items-center ">
         <div className="channelDetails d-flex align-items-center gap-2">
@@ -28,7 +33,8 @@ export default function VideoPlayerData() {
             className="channelImage rounded-circle"
           />
           <div className="channel d-flex flex-column ">
-            <span className="channelTitle">Youtube Channel Name</span>
+            <span className="channelTitle">channel Title</span>
+            {/* <span className="channelTitle">{channelTitle}</span> */}
             <span className="subscribers">
               {numeral(175025).format("0.a")} subsribers
             </span>
@@ -47,7 +53,8 @@ export default function VideoPlayerData() {
                 </span>
               )}
               &nbsp;
-              {numeral(180000).format("0.a")}
+              {numeral(123000).format("0.a")}
+              {/* {numeral(likeCount).format("0.a")} */}
             </span>
             <span>|</span>
             <span onClick={toggleDisliked} className="dislikeButton">
@@ -69,27 +76,23 @@ export default function VideoPlayerData() {
       </div>
       <div className="description">
         <span>
-          <strong>{numeral(1800000).format("0.a")}</strong>
+          {/* <strong>{numeral(viewCount).format("0.a")}</strong> */}
+          <strong>{numeral(500000).format("0.a")}</strong>
         </span>
-        &nbsp;
+        &nbsp;&nbsp;
         <span>
-          <strong>{dayjs("2018-08-08").fromNow()}</strong>
+          {/* <strong>{dayjs(publishedAt).fromNow()}</strong> */}
+          <strong>{dayjs("2020-02-13").fromNow()}</strong>
         </span>
         &nbsp;
         <p
           className={!showMore ? "showLess descriptionText" : "descriptionText"}
         >
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae at
-          possimus consequatur, recusandae reiciendis magnam! Expedita numquam,
-          saepe dolorum dicta aperiam cumque optio, dolores libero
-          reprehenderit, consequuntur nam beatae labore! Ea earum nostrum velit
-          numquam quasi necessitatibus officiis deserunt placeat vel laboriosam
-          minima vero, asperiores in possimus laudantium maiores omnis
-          repudiandae ipsam eligendi, doloremque, nesciunt quae obcaecati
-          facere. Officiis, itaque. Fugiat dicta animi quos veniam, aliquam
-          quaerat molestiae illo aperiam praesentium labore unde eius natus
-          nesciunt similique repellat quasi molestias ipsa, cum magni fugit
-          maiores suscipit. Voluptatum velit cumque libero? lorem*5
+          {/* {description} */}
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+          voluptas nulla officia, a esse sint. Nemo deserunt praesentium, soluta
+          asperiores eius cupiditate voluptatem cum amet laboriosam officiis ea
+          numquam magni!
         </p>
         <span className="showMore" onClick={toggleShowMore}>
           {showMore ? "Show Less" : "Show More"}
