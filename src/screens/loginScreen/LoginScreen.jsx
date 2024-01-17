@@ -35,12 +35,11 @@ export default function LoginScreen() {
         photoURL: response.user.photoURL,
       };
 
-      //Loading set to false inside authSuccess reducer.
       dispatch(authSuccess(accessToken));
       dispatch(loadProfile(userProfile));
 
       //Save the data in session storage. Otherwise we lose the access token on every refresh
-      sessionStorage.setItem("access-token", accessToken);
+      sessionStorage.setItem("access-token", JSON.stringify(accessToken));
       sessionStorage.setItem("user-profile", JSON.stringify(userProfile));
     } catch (error) {
       dispatch(authRejected(error.message));

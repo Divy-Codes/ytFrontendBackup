@@ -38,6 +38,11 @@
           outline: none;
         }
       }
+      .channelIsSubscribed {
+        background-color: rgba(68, 68, 68, 0.5);
+        color: #fff;
+        font-weight: 500;
+      }
     }
 
     .likeUnlike {

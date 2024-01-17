@@ -8,6 +8,7 @@ import LoginScreen from "./screens/loginScreen/LoginScreen";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VideoPlayerScreen from "./screens/VideoPlayer/VideoPlayerScreen";
+import SearchScreen from "./screens/searchScreen/SearchScreen";
 
 const HomeLayout = ({ children }) => {
   const [sidebar, toggleSidebar] = useReducer((value) => !value, false);
@@ -49,10 +50,10 @@ export default function App() {
         }
       />
       <Route
-        path="/search"
+        path="/search/:query"
         element={
           <HomeLayout>
-            <h1>Search Component</h1>
+            <SearchScreen />
           </HomeLayout>
         }
       />

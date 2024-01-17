@@ -48,13 +48,20 @@
 
     button {
       padding: 0 1.25rem;
-      color: $text-color;
+      color: #eee;
       background-color: #242424;
       border: none;
       border-top-right-radius: inherit;
       border-bottom-right-radius: inherit;
+      font-weight: 500;
+      cursor: pointer;
       &:focus {
         border: none;
+      }
+      &:disabled {
+        color: #777;
+        cursor: default;
+        font-weight: 400;
       }
     }
   }

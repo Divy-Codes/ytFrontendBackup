@@ -27,7 +27,6 @@
     .commentText {
       margin: 0;
       white-space: pre-wrap;
-      @include lineClamp(3);
     }
   }
 }

@@ -44,7 +44,7 @@
         }
         &:focus {
           border: none;
-          outline: none;
+          // outline: none;
         }
       }
     }
@@ -75,9 +75,14 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     background-color: rgb(68, 68, 68);
+    position: relative;
 
     .closePanel {
       text-decoration: underline;
+      top: 1rem;
+      // background-color: rgb(68, 68, 68);
+      z-index: 8;
+      cursor: pointer;
     }
 
     .commentsPanel {

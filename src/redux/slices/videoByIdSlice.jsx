@@ -10,21 +10,20 @@ const initialState = {
 export const getVideoById = createAsyncThunk(
   "videoInfo/getVideoById",
   async (id) => {
-    console.log(`id:`, id);
-
     try {
-      const { data } = await request("/videos", {
+      const response = await request("/videos", {
         params: {
           part: "snippet,contentDetails,statistics",
           id: id,
         },
-        // headers:{
-        //   Authorization: `Bearer ${}',
-        //   Accept: "application/json"
-        // }
       });
-      console.log(`response by id:`, data.items[0]);
-      return { video: data.items[0] };
+      return {
+        video: {
+          snippet: response.data.items[0].snippet,
+          contentDetails: response.data.items[0].contentDetails,
+          statistics: response.data.items[0].statistics,
+        },
+      };
     } catch (error) {
       console.log(`error:`, error.message);
       return { error: error.message };

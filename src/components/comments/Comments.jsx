@@ -3,14 +3,32 @@ import Comment from "../comment/Comment";
 import { useState, useEffect } from "react";
 import SlidingPanel from "react-sliding-side-panel";
 import "react-sliding-side-panel/lib/index.css";
-export default function Comments() {
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCommentsById,
+  postComment,
+} from "../../redux/slices/commentsByIdSlice";
+
+export default function Comments({ videoId, totalComments }) {
+  const [comments, setComments] = useState(null);
+  const [commentText, setCommentText] = useState("");
+  const commentsData = useSelector((state) => state.commentThreads.comments);
+  const commentPosted = useSelector(
+    (state) => state.commentThreads.commentPosted
+  );
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.authObject.user); //for profile pic
+
   //Collapse the comments if windowWidth<1200px
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // const [windowWidth, setWindowWidth] = useState(1199);
+  useEffect(() => {
+    window.addEventListener("resize", setWindowWidth(window.innerWidth));
+    return () =>
+      window.removeEventListener("resize", setWindowWidth(window.innerWidth));
+  }, []);
 
   const CollapsedComments = () => {
-    // const [commentsVisible, toggleVisbility] = useReducer(
-    //   (value) => !value,
-    //   false
-    // );
     const [openCommentsPanel, setCommentsPanel] = useState(false);
 
     return (
@@ -39,11 +57,18 @@ export default function Comments() {
               Hide Comments
             </p>
             <ul className="commentsList">
-              {[...Array(20)].map((comment, i) => (
+              {/* {[...Array(20)].map((comment, i) => (
                 <li key={i}>
                   <Comment />
                 </li>
-              ))}
+              ))} */}
+
+              {comments &&
+                comments.map((comment, i) => (
+                  <li key={i}>
+                    <Comment comment={comment} />
+                  </li>
+                ))}
             </ul>
           </SlidingPanel>
         </div>
@@ -51,33 +76,55 @@ export default function Comments() {
     );
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    window.addEventListener("resize", setWindowWidth(window.innerWidth));
-    return () =>
-      window.removeEventListener("resize", setWindowWidth(window.innerWidth));
-  }, [windowWidth]);
+  const addComment = (e) => {
+    e.preventDefault();
+    if (commentText === "") return;
+    dispatch(postComment({ videoId, commentText }));
+    setCommentText("");
+  };
 
-  const [inputValue, setInputValue] = useState("");
+  //To update comments, another call to getCommentsById(videoId) doesn't work as data on servers isn't getting updated immediately. It takes more than a minute sometimes for updation.
+  //This is a somewhat safe workaround because, we are updating from the very data provided by API upon adding a comment. We aren't simply hard-coding it.
+  useEffect(() => {
+    if (commentPosted !== null) {
+      setComments([commentPosted.snippet.topLevelComment.snippet, ...comments]);
+    }
+  }, [commentPosted]);
+
+  //Get Comments for this video
+  useEffect(() => {
+    dispatch(getCommentsById(videoId));
+  }, [dispatch, videoId]);
+
+  useEffect(() => {
+    if (commentsData) {
+      setComments(
+        commentsData.map((comment) => comment.snippet.topLevelComment.snippet)
+      );
+    }
+  }, [commentsData]);
+
   return (
     <section className="commentSection">
-      <h5>1697 Comments</h5>
+      <h5>{totalComments} Comments</h5>
       <div className="commentsForm d-flex w-100 my-2">
         <img
-          src="https://yt3.ggpht.com/NOSx1LAKxaiTIBDjoFRm9xvT7Ytp_KjZTrxyci6QMc-2kpKJeDqqCaDl4KbGqoB-PLH4063mnQ=s88-c-k-c0x00ffffff-no-rj"
-          alt="Your Channel Thumbnail"
+          src={userProfile.photoURL}
+          // src="https://yt3.ggpht.com/NOSx1LAKxaiTIBDjoFRm9xvT7Ytp_KjZTrxyci6QMc-2kpKJeDqqCaDl4KbGqoB-PLH4063mnQ=s88-c-k-c0x00ffffff-no-rj"
+          alt="Channel Thumbnail"
           className="rounded-circle"
         />
-        <form className="d-flex flex-grow-1">
+        <form className="d-flex flex-grow-1" onSubmit={addComment}>
           <input
             type="text"
-            name="comment"
+            name="commentText"
             id="commentInput"
             placeholder="Add a comment ..."
             className="flex-grow-1"
-            onChange={(e) => setInputValue(e.target.value)}
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
           />
-          <button className="border-0 p-2" disabled={inputValue === ""}>
+          <button className="border-0 p-2" disabled={commentText === ""}>
             Comment
           </button>
         </form>
@@ -87,11 +134,12 @@ export default function Comments() {
         <CollapsedComments />
       ) : (
         <ul className="commentsList">
-          {[...Array(20)].map((comment, i) => (
-            <li key={i}>
-              <Comment />
-            </li>
-          ))}
+          {comments &&
+            comments.map((comment, i) => (
+              <li key={i}>
+                <Comment comment={comment} />
+              </li>
+            ))}
         </ul>
       )}
     </section>
