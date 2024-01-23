@@ -1,5 +1,32 @@
 @import "../../_base.scss";
 
+.channelRow {
+  // margin: 1rem 0;
+  .channelThumbnailWrapper {
+    text-align: center;
+    .channelThumbnailImage {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+  }
+
+  .channelDetails {
+    margin: 0.5rem;
+    .channelTitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #eee;
+    }
+
+    .channelDescription {
+      font-size: 0.8rem;
+      color: #aaa;
+      @include lineClamp(1);
+    }
+  }
+}
+
 .sidePlaylistSection {
   cursor: pointer;
   margin: 1rem 0;
@@ -14,48 +41,57 @@
         width: 100%;
       }
       .sideVideoDuration {
-        font-size: 0.5rem;
+        font-size: 0.9rem;
         background-color: rgba(0, 0, 0, 0.9);
-        border-radius: 5px;
-        padding: 0.1rem 0.2rem;
+        border-radius: 0.5rem;
+        padding: 0.2rem 0.4rem;
         position: absolute;
-        bottom: 0.1rem;
-        right: 0.1rem;
+        bottom: 0.3rem;
+        right: 0.3rem;
         color: #fff;
       }
     }
   }
 
-  // .searchVideoThumbail.sideVideoThumbnail {
-  //   border-radius: 0.5rem;
-  // }
-  // .searchVideoThumbail {
-  //   border-radius: 50px;
-  // }
-
   .videoDetails {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 0.1rem;
+    gap: 0.5rem;
     color: #eee;
+    margin: 0.5rem;
     .sideVideoTitle {
-      // padding: 0 0.5rem;
+      //   padding: 0 0.5rem;
       @include lineClamp(2);
-      font-size: 0.8rem;
+      font-size: 1.1rem;
       font-weight: 500;
     }
     .sideVideoDetails {
       color: #aaa;
-      font-size: 0.6rem;
+      font-size: 0.9rem;
       .sideChannelName {
         @include lineClamp(1);
         width: 65%;
+        letter-spacing: 0.5px;
+        display: flex;
+        gap: 0.3rem;
+        align-items: center;
+
+        .channelThumbnail {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+        }
       }
     }
     .viewsRelativeTime {
       color: #aaa;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
+    }
+    .description {
+      font-size: 0.8rem;
+      @include lineClamp(1);
+      color: #aaa;
     }
   }
 }

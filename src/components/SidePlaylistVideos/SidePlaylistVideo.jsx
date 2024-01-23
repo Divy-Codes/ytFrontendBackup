@@ -73,31 +73,28 @@ export default function SidePlaylistVideo({ video }) {
         </div>
       </Col>
       <Col xs={12} sm={7} md={6} className="videoDetails p-0">
-        <div className="otherDetails">
-          <span className="sideVideoTitle">
-            {/* NodeJS Realtime Chat: Build a FULL-STACK app in 27 Minutes! (Best UI
-            🤩) */}
-            {title}
-          </span>
-          <div className="sideVideoDetails">
-            <div className="sideChannelName">
-              {/* Divyanshu Codes Youtube Divyanshu Codes Youtube Divyanshu Codes
+        {/* <div className="otherDetails"> */}
+        <span className="sideVideoTitle">
+          {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora corrupti aperiam saepe mollitia quos odio nam  */}
+          {title}
+        </span>
+        <div className="sideVideoDetails">
+          <div className="sideChannelName">
+            {/* Divyanshu Codes Youtube Divyanshu Codes Youtube Divyanshu Codes
               Youtube */}
-              {channelTitle}
-            </div>
-          </div>
-          <div className="viewsRelativeTime">
-            <span className="sideViews">
-              {numeral(viewCount).format("0.a")}
-            </span>
-            {/* <span className="sideViews">{numeral("12800").format("0.a")}</span> */}
-            &nbsp;&bull;&nbsp;
-            <span className="relativeTime">{dayjs(publishedAt).fromNow()}</span>
-            {/* <span className="relativeTime">
-              {dayjs("2020-06-06").fromNow()}
-            </span> */}
+            {channelTitle}
           </div>
         </div>
+        <div className="viewsRelativeTime">
+          <span className="sideViews">{numeral(viewCount).format("0.a")}</span>
+          {/* <span className="sideViews">{numeral("12800").format("0.a")}</span> */}
+          &nbsp;&bull;&nbsp;
+          <span className="relativeTime">{dayjs(publishedAt).fromNow()}</span>
+          {/* <span className="relativeTime">
+              {dayjs("2020-06-06").fromNow()}
+            </span> */}
+        </div>
+        {/* </div> */}
       </Col>
     </Row>
   );

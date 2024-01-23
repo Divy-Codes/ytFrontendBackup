@@ -9,6 +9,11 @@
   gap: 0.5rem;
   transition: transform 0.2s ease-in-out;
 
+  //Remove all styling of Links
+  a {
+    all: unset;
+  }
+
   li {
     list-style: none;
     padding: 0.5rem 1rem;

@@ -1,20 +1,17 @@
 //To remove container's default padding and
-.Container {
-  padding: 0;
-}
 
 //Remove Vertical scrollbar of InfiniteScroll
-.infinite-scroll-component {
-  width: 100%;
-  margin: auto;
-  overflow: hidden;
-  padding: 0;
-  &::-webkit-scrollbar {
-    display: none;
+.searchContainer {
+  margin-top: 10rem; //Added later REMOVE
+  .infinite-scroll-component {
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    margin-top: 2rem; //Added later REMOVE
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
-}
-
-.row {
-  // width: 100%;
-  margin: auto;
 }

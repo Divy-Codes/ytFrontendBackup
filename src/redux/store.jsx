@@ -5,6 +5,8 @@ import videoByIdSlice from "./slices/videoByIdSlice";
 import channelByIdSlice from "./slices/channelById";
 import commentsByIdSlice from "./slices/commentsByIdSlice";
 import relatedVideosSlice from "./slices/relatedVideosSlice";
+import searchVideoSlice from "./slices/searchVideoSlice";
+import subscriptionsSlice from "./slices/subscriptionsSlice";
 export const store = configureStore({
   reducer: {
     authObject: authReducer,
@@ -13,5 +15,7 @@ export const store = configureStore({
     selectedChannelDetails: channelByIdSlice,
     commentThreads: commentsByIdSlice,
     relatedVideos: relatedVideosSlice,
+    searchedVideos: searchVideoSlice,
+    subscriptions: subscriptionsSlice,
   },
 });

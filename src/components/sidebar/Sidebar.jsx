@@ -12,6 +12,7 @@ import auth from "../../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/slices/authSlice";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ sidebar, toggleSidebar }) {
   const dispatch = useDispatch();
@@ -30,10 +31,13 @@ export default function Sidebar({ sidebar, toggleSidebar }) {
         <MdHome size={23} />
         <span>Home</span>
       </li>
-      <li>
-        <MdSubscriptions size={23} />
-        <span>Subscriptions</span>
-      </li>
+
+      <Link to="/feed/subscriptions">
+        <li>
+          <MdSubscriptions size={23} />
+          <span>Subscriptions</span>
+        </li>
+      </Link>
       <li>
         <IoMdThumbsUp size={23} />
         <span>Liked</span>

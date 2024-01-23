@@ -9,6 +9,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VideoPlayerScreen from "./screens/VideoPlayer/VideoPlayerScreen";
 import SearchScreen from "./screens/searchScreen/SearchScreen";
+import Subscriptions from "./screens/subscriptions/Subscriptions";
 
 const HomeLayout = ({ children }) => {
   const [sidebar, toggleSidebar] = useReducer((value) => !value, false);
@@ -19,7 +20,7 @@ const HomeLayout = ({ children }) => {
         <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar} />
         {/* Import Container from react-bootstrap. 
     'fluid' :  to remove default padding etc*/}
-        <Container fluid className="appMain ">
+        <Container fluid className="appMain">
           {children}
         </Container>
       </div>
@@ -62,6 +63,22 @@ export default function App() {
         element={
           <HomeLayout>
             <VideoPlayerScreen />
+          </HomeLayout>
+        }
+      />
+      <Route
+        path="feed/subscriptions"
+        element={
+          <HomeLayout>
+            <Subscriptions />
+          </HomeLayout>
+        }
+      />
+      <Route
+        path="channel/:channelId"
+        element={
+          <HomeLayout>
+            <h2>Channel Screen</h2>
           </HomeLayout>
         }
       />

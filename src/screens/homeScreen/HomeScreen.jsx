@@ -27,6 +27,8 @@ export default function HomeScreen() {
   } = useSelector((state) => state.homeVideos);
 
   const fetchMoreData = () => {
+    console.log(`homeScreen fetchmore data called`);
+
     if (activeCategory == "All") {
       dispatch(getHomeVideos());
     } else {
@@ -35,7 +37,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <Container className="Container">
+    <Container className="Container" id="homeScreenContainer">
       <CategoriesBar />
       {/* Row for video component */}
       <InfiniteScroll

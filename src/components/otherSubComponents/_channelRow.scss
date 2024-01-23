@@ -1,0 +1,57 @@
+@import "../../_base.scss";
+
+.channelRow {
+  // margin: 1rem 0;
+  cursor: pointer;
+  .channelThumbnailWrapper {
+    text-align: center;
+    .channelThumbnailImage {
+      width: 9.375rem;
+      height: 9.375rem;
+      border-radius: 50%;
+    }
+  }
+
+  .channelDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin: 0.5rem;
+    .channelTitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #eee;
+    }
+
+    .channelDescription {
+      font-size: 0.8rem;
+      color: #aaa;
+      @include lineClamp(1);
+    }
+
+    .numOfVideos {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablets-potrait) {
+  .channelRow {
+    .channelThumbnailWrapper {
+      .channelThumbnailImage {
+        width: 6rem;
+        height: 6rem;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-small) {
+  .channelDetails {
+    align-items: center;
+
+    .channelDescription {
+      @include lineClamp(2);
+    }
+  }
+}
