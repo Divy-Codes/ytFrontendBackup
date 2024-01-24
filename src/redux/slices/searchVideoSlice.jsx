@@ -6,11 +6,14 @@ const initialState = {
   error: null,
   loading: false,
   nextPageToken: null,
+  query: "",
 };
 
 export const getSearchedVideos = createAsyncThunk(
   "searchedVideos/getSearchedVideos",
   async (query, { getState }) => {
+    console.log(`query in slice:`, query);
+
     try {
       const { data } = await request("/search", {
         params: {
@@ -24,6 +27,7 @@ export const getSearchedVideos = createAsyncThunk(
       return {
         items: data.items,
         nextPageToken: data.nextPageToken,
+        query: query,
       };
     } catch (error) {
       console.log(`error:`, error.response.data);
@@ -44,8 +48,13 @@ const searchedVideoSlice = createSlice({
         return {
           ...state,
           loading: false,
+          query: action.payload.query,
           // videos: [...state.videos, ...action.payload.items],
-          videos: [...new Set([...state.videos, ...action.payload.items])],
+          //Append the videos only if query is the same.
+          videos:
+            action.payload.query === state.query
+              ? [...new Set([...state.videos, ...action.payload.items])]
+              : action.payload.items,
 
           nextPageToken: action.payload.nextPageToken,
         };
@@ -57,10 +66,3 @@ const searchedVideoSlice = createSlice({
 });
 
 export default searchedVideoSlice.reducer;
-
-// setBooks((prevBooks) => [
-//   ...new Set([
-//     ...prevBooks,
-//     ...res.data.docs.map((book) => book.title),
-//   ]),
-// ]);

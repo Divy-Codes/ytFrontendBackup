@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ChannelRow({ video, subscriptions }) {
   const navigate = useNavigate();
+
   const {
     id,
     snippet: {
@@ -54,9 +55,11 @@ export default function ChannelRow({ video, subscriptions }) {
           consequuntur obcaecati nostrum, tempore ex nobis distinctio
           reprehenderit ipsum iusto?
         </div> */}
-        <div className="numOfVideos">
-          {video?.contentDetails.totalItemCount}&nbsp;Videos
-        </div>
+        {subscriptions && (
+          <div className="numOfVideos">
+            {video?.contentDetails.totalItemCount}&nbsp;Videos
+          </div>
+        )}
       </Col>
     </Row>
   );

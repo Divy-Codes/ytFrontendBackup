@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function Header({ toggleSidebar }) {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
   const searchVideo = (e) => {
     e.preventDefault();
     navigate(`/search/${searchQuery}`);

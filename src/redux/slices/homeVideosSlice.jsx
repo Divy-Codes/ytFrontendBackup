@@ -111,3 +111,6 @@ const homeVideosSlice = createSlice({
 });
 
 export default homeVideosSlice.reducer;
+
+//TRY THIS. Convert it to set for only unique videos
+// videos:(state.activeCategory === action.payload.category) ? ([...new Set([...state.videos, ...action.payload.items])]) : action.payload.videos
