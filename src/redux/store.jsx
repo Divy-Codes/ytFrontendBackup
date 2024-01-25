@@ -7,6 +7,7 @@ import commentsByIdSlice from "./slices/commentsByIdSlice";
 import relatedVideosSlice from "./slices/relatedVideosSlice";
 import searchVideoSlice from "./slices/searchVideoSlice";
 import subscriptionsSlice from "./slices/subscriptionsSlice";
+import channelVideosSlice from "./slices/channelVideosSlice";
 export const store = configureStore({
   reducer: {
     authObject: authReducer,
@@ -17,5 +18,6 @@ export const store = configureStore({
     relatedVideos: relatedVideosSlice,
     searchedVideos: searchVideoSlice,
     subscriptions: subscriptionsSlice,
+    uploadedChannelVideos: channelVideosSlice,
   },
 });

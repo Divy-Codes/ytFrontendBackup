@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import VideoPlayerScreen from "./screens/VideoPlayer/VideoPlayerScreen";
 import SearchScreen from "./screens/searchScreen/SearchScreen";
 import Subscriptions from "./screens/subscriptions/Subscriptions";
+import ChannelScreen from "./screens/channelScreen/ChannelScreen";
 
 const HomeLayout = ({ children }) => {
   const [sidebar, toggleSidebar] = useReducer((value) => !value, false);
@@ -78,7 +79,7 @@ export default function App() {
         path="channel/:channelId"
         element={
           <HomeLayout>
-            <h2>Channel Screen</h2>
+            <ChannelScreen />
           </HomeLayout>
         }
       />

@@ -14,7 +14,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Video({ video }) {
+export default function Video({ video, channelScreen }) {
   const {
     id,
     snippet: {
@@ -24,6 +24,7 @@ export default function Video({ video }) {
       channelId,
       thumbnails: { medium },
     },
+    contentDetails,
     // contentDetails: { duration },
     // statistics: { viewCount },
   } = video;
@@ -33,7 +34,7 @@ export default function Video({ video }) {
   const [viewCount, setViewCount] = useState("");
 
   //In "/video" API call, the id is simple string property. But in "/search" API call, the id is an object and the id is inside the "videoId" property of "id". To factor in both, we need the following
-  const videoId = id?.videoId || id;
+  const videoId = id?.videoId || contentDetails?.videoId || id;
 
   useEffect(() => {
     (async () => {
@@ -82,19 +83,27 @@ export default function Video({ video }) {
         />
         <span className="duration">{videoDuration}</span>
       </div>
-      <div className="detailsContainer">
-        <div className="channelImage">
-          <LazyLoadImage
-            src={channelThumbnailURL}
-            alt="Channel Image"
-            effect="blur"
-            className="channelThumbnail"
-          />
-        </div>
+      <div
+        className={
+          channelScreen ? "channelScreenDetailsContainer" : "detailsContainer"
+        }
+      >
+        {!channelScreen && (
+          <div className="channelImage">
+            <LazyLoadImage
+              src={channelThumbnailURL}
+              alt="Channel Image"
+              effect="blur"
+              className="channelThumbnail"
+            />
+          </div>
+        )}
         <div className="details">
           <div className="videoTitle">{title}</div>
           <div className="videoDetails">
-            <span className="videoChannel">{channelTitle}</span>
+            {!channelScreen && (
+              <span className="videoChannel">{channelTitle}</span>
+            )}
             <span>
               <AiFillEye />
               &nbsp;

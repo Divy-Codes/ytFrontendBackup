@@ -59,4 +59,31 @@
       letter-spacing: 0.5px;
     }
   }
+
+  //If channelScreen is calling the video
+  .channelScreenDetailsContainer {
+    .channelImage {
+      .channelThumbnail {
+        object-fit: contain;
+        border-radius: 50%;
+        width: 100%;
+      }
+    }
+
+    .videoTitle {
+      color: #fff;
+      margin-bottom: 0.3rem;
+      @include lineClamp(2);
+    }
+
+    .videoDetails {
+      font-size: 0.875rem;
+      color: #888;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  }
 }
