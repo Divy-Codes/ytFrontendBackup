@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import "./_VideoPlayerScreen.scss";
+import "./_videoPlayerScreen.scss";
 import VideoPlayerData from "../../components/videoPlayerData/VideoPlayerData";
 import Comments from "../../components/comments/Comments";
 import SidePlaylistVideo from "../../components/SidePlaylistVideos/SidePlaylistVideo";
@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideoById } from "../../redux/slices/videoByIdSlice";
-import { getChannelById } from "../../redux/slices/channelById";
 import { getRelatedVideos } from "../../redux/slices/relatedVideosSlice";
 
 export default function VideoPlayerScreen() {
